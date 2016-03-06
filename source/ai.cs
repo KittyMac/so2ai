@@ -3,33 +3,28 @@ using System.Collections.Generic;
 
 namespace SampleAI {
 	
-	public class AI : ISO2AI {
+	public class AI : SO2AI {
 
-		//  ****************************  Begin required methods for so2ai interface **************************** 
-
-		static AI() {
-			UnityEngine.Debug.Log ("AI static constructor");
-		}
-
+		//  ****************************  Begin required overrides for so2ai subclass **************************** 
 
 		// This name should be globally unique among other SO2 ai
-		public string Identifier () {
+		public override string Identifier () {
 			return "SampleAI";
 		}
 
 		// This is the name displayed to the player when they are selecting AI for their opponents
-		public string UserFacingName () {
+		public override string UserFacingName () {
 			return "Sample AI";
 		}
 
 		// This is the name displayed to the player when they are selecting AI for their opponents
-		public string UserFacingAuthor () {
+		public override string UserFacingAuthor () {
 			return "Rocco Bowling";
 		}
 
 		// This is the a longer description displayed to the player when they are selecting AI for their opponents; in other words, explain
 		// what this AI is about and why they should consider picking it.  This is a Markdown string.
-		public string UserFacingDescription () {
+		public override string UserFacingDescription () {
 			return "This sample AI will simply explore all planets within range of its home system.  Great for playing against a placebo AI for learning the game!";
 		}
 
@@ -47,7 +42,7 @@ namespace SampleAI {
 		/// <param name="raceTypes">A list of valid race id strings for this game.</param>
 		/// <param name="stockRaces">A list of valid empires (aka the "stock" race configurations); your AI can use these if it wishes, or it can create a custom race.</param>
 
-		public void RegisterEmpire(SOGGame game, SOEEmpire aiEmpire, List<string> raceTypes, List<SOEEmpire> stockRaces) {
+		public override void RegisterEmpire(SOGGame game, SOEEmpire aiEmpire, List<SOEEmpire> stockRaces) {
 			string error;
 
 			// This simple AI will simply grab one of the stock races at random to use
@@ -80,7 +75,7 @@ namespace SampleAI {
 		/// <param name="game">The game in which your AI is playing.</param>
 		/// <param name="aiEmpire">The empire which your AI represents.</param>
 
-		public void ProcessTurn(SOGGame game, SOEEmpire aiEmpire) {
+		public override void ProcessTurn(SOGGame game, SOEEmpire aiEmpire) {
 
 			// This sample AI will do some basic galactic exploration
 			PerformExploration(game, aiEmpire);
